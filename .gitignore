@@ -1,0 +1,5 @@
+.vs/*
+LMS.api/bin/*
+LMS.api/Migrations/*
+LMS.api/obj/*
+LMS.api/Properties/*

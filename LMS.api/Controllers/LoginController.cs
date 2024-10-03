@@ -29,7 +29,7 @@ namespace LMS.api.Controllers
 
             if (user == null || loginModel.Password != user.Password)
             {
-                return Unauthorized("Invalid login attempt.");
+                return new JsonResult( Unauthorized("Invalid login attempt."));
             }
 
             // Create claims (information about the user)
@@ -46,7 +46,7 @@ namespace LMS.api.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
 
-            return Ok("Login successful");
+            return new JsonResult(Ok("Login successful"));
         }
 
         [Authorize]

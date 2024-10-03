@@ -26,6 +26,8 @@ namespace LMS.api.Controllers
             return new JsonResult(users);
         }
 
+
+
         //Get: get user by email
         [HttpGet("email")]
         public async Task<IActionResult> GetUserByEmail(string email)
@@ -33,5 +35,59 @@ namespace LMS.api.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(u=>u.Email==email);
             return new JsonResult(user);
         }
+
+        // Post: Create a User {Instructor,Trainees}
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateUser([Bind("FullName,Password,Email,Role,Points")][FromBody] Users myData)
+        {
+            var users = new List<Users>();
+
+            users = await _context.Users.ToListAsync();
+            //myData.Id = booking.LastOrDefault().Id + 1;
+
+
+            _context.Add(myData);
+            await _context.SaveChangesAsync();
+
+            users = await _context.Users.ToListAsync();
+
+            return new JsonResult(users);
+        }
+
+        // Delete: delete the user using Id
+        [HttpDelete]
+        [Route("{Id}")]
+        public async Task<IActionResult> DeleteBooking(int Id)
+        {
+            var user = await _context.Users.FindAsync(Id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+            }
+            else
+            {
+                return new JsonResult("Error: User doesn't exist");
+            }
+
+            await _context.SaveChangesAsync();
+            
+            return new JsonResult("Deleted Successfully");
+        }
+
+        // PUT: update the user details
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateBookingsPut(int Id, [FromBody] Users data)
+        {
+
+            var booking = new List<Users>();
+
+            data.Id = Id;
+
+            _context.Update(data);
+            await _context.SaveChangesAsync();
+            booking = await _context.Users.ToListAsync();
+            return new JsonResult(booking);
+        }
+
     }
 }

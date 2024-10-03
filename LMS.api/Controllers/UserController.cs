@@ -25,5 +25,13 @@ namespace LMS.api.Controllers
 
             return new JsonResult(users);
         }
+
+        //Get: get user by email
+        [HttpGet("email")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u=>u.Email==email);
+            return new JsonResult(user);
+        }
     }
 }

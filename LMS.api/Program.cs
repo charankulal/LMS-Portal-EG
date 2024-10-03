@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var AllOrigins = "AllOrigins";
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -36,6 +38,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/api/user/access-denied";
     });
 
+builder.Services.AddCors(
+    options =>
+    {
+        options.AddPolicy(name: AllOrigins,
+            policy =>
+            {
+                policy.WithOrigins("http://localhost:4200/").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            }
+            );
+    }
+    );
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,7 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(AllOrigins);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

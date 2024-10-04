@@ -18,5 +18,11 @@ namespace LMS.api.Models
         public string Role { get; set; } = string.Empty;
 
         public int Points { get; set; }
+
+        public virtual ICollection<Attendances>? Attendance { get; set; }
+        public virtual ICollection<BatchUsers>? BatchUsers { get; set; }
+        public virtual ICollection<UserCertifications>? UserCertification { get; set; }
+        public virtual ICollection<UserContentTracks>? UserContentTrack { get; set; }
+        public virtual ICollection<Batches>? Batches { get; set; }
     }
 }

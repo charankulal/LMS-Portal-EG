@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.api.Models
 {
@@ -7,7 +8,11 @@ namespace LMS.api.Models
         [Key]
         public int Id { get; set; }
 
+
         public int BatchId { get; set; }
+
+        [ForeignKey("BatchId")]
+        public virtual Batches? Batches { get; set; }
 
         public string Name { get; set; } = string.Empty;
 
@@ -18,6 +23,8 @@ namespace LMS.api.Models
         public DateOnly To_Day { get; set; }
 
         public int points { get; set; }
+
+        public virtual ICollection<Contents>? Contents { get; set; }
     }
 }
 

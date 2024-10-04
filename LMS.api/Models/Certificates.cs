@@ -12,5 +12,7 @@ namespace LMS.api.Models
         public string Description { get; set; } = string.Empty;
 
         public int Points { get; set; }
+
+        public virtual ICollection<UserCertifications>? UserCertification { get; set; }
     }
 }

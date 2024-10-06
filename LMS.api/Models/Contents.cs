@@ -21,6 +21,5 @@ namespace LMS.api.Models
         public string Description { get; set; } = string.Empty;
 
 
-        public virtual ICollection<UserContentTracks>? UserContentTrack { get; set; }
     }
 }

@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace LMS.api.Controllers
 {
-
-    [Authorize]
     [Route("api/batches")]
     [ApiController]
     public class BatchController : ControllerBase
@@ -37,6 +36,40 @@ namespace LMS.api.Controllers
         }
 
         // Create a new batch
+        [HttpPost("create-batch")]
+        public async Task<IActionResult> CreateNewBatch([FromBody] Batches batchData)
+        {
+            _context.Add(batchData);
+            await _context.SaveChangesAsync();
+            return new JsonResult(new { id = batchData.Id });
+        }
+
+        // Delete the batch by Id
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteBatchById(int Id)
+        {
+            var batch = await _context.Batches.FindAsync(Id);
+            if (batch != null)
+            {
+                _context.Batches.Remove(batch);
+            }
+            else
+            {
+                return new JsonResult("Error: batch doesn't exist");
+            }
+
+            await _context.SaveChangesAsync();
+
+            return new JsonResult("Deleted Successfully");
+        }
+
+        // Get all batches created by particular instructor
+        [HttpGet("{instructorId}/batches")]
+        public async Task<IActionResult> GetBatchesByInstructorId(int instructorId)
+        {
+            var batches = await _context.Batches.Where(b => b.InstructorId == instructorId).ToListAsync();
+            return new JsonResult(batches);
+        }
 
     }
 }

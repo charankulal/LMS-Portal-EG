@@ -24,7 +24,6 @@ namespace LMS.api.Models
 
         public int points { get; set; }
 
-        public virtual ICollection<Contents>? Contents { get; set; }
     }
 }
 

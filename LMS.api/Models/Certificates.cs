@@ -7,12 +7,14 @@ namespace LMS.api.Models
         [Key]
         public int Id { get; set; }
 
+        public int SprintId { get; set; }
+
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
 
         public int Points { get; set; }
 
-        public virtual ICollection<UserCertifications>? UserCertification { get; set; }
+      
     }
 }

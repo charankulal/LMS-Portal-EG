@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.api.Models
 {
@@ -19,10 +20,6 @@ namespace LMS.api.Models
 
         public int Points { get; set; }
 
-        public virtual ICollection<Attendances>? Attendance { get; set; }
-        public virtual ICollection<BatchUsers>? BatchUsers { get; set; }
-        public virtual ICollection<UserCertifications>? UserCertification { get; set; }
-        public virtual ICollection<UserContentTracks>? UserContentTrack { get; set; }
-        public virtual ICollection<Batches>? Batches { get; set; }
+  
     }
 }

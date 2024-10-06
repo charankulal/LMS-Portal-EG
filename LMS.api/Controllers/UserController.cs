@@ -57,7 +57,7 @@ namespace LMS.api.Controllers
         // Delete: delete the user using Id
         [HttpDelete]
         [Route("{Id}")]
-        public async Task<IActionResult> DeleteBooking(int Id)
+        public async Task<IActionResult> DeleteUser(int Id)
         {
             var user = await _context.Users.FindAsync(Id);
             if (user != null)
@@ -76,7 +76,7 @@ namespace LMS.api.Controllers
 
         // PUT: update the user details
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateBookingsPut(int Id, [FromBody] Users data)
+        public async Task<IActionResult> UpdateUsers(int Id, [FromBody] Users data)
         {
 
             var booking = new List<Users>();

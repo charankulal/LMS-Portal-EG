@@ -36,6 +36,15 @@ namespace LMS.api.Controllers
             return new JsonResult(user);
         }
 
+        [HttpGet("trainees")]
+        public async Task<IActionResult> GetTrainees()
+        {
+            var trainees = await _context.Users
+                                 .Where(u => u.Role == "Trainee")
+                                 .ToListAsync();
+            return new JsonResult(trainees);
+        }
+
         // Post: Create a User {Instructor,Trainees}
         [HttpPost("create")]
         public async Task<IActionResult> CreateUser([Bind("FullName,Password,Email,Role,Points")][FromBody] Users myData)

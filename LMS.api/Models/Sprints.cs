@@ -11,8 +11,7 @@ namespace LMS.api.Models
 
         public int BatchId { get; set; }
 
-        [ForeignKey("BatchId")]
-        public virtual Batches? Batches { get; set; }
+        
 
         public string Name { get; set; } = string.Empty;
 

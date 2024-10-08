@@ -63,6 +63,18 @@ namespace LMS.api.Controllers
             return new JsonResult("Deleted Successfully");
         }
 
+        // Update the batch by id 
+        [HttpPut("{Id}")]
+
+        public async Task<IActionResult> UpdateBatchById(int Id, Batches batch)
+        {
+            batch.Id = Id;
+            _context.Update(batch);
+            await _context.SaveChangesAsync();
+            var batches = await _context.Batches.ToListAsync();
+            return new JsonResult(batches);
+        }
+
         // Get all batches created by particular instructor
         [HttpGet("{instructorId}/batches")]
         public async Task<IActionResult> GetBatchesByInstructorId(int instructorId)
@@ -71,5 +83,6 @@ namespace LMS.api.Controllers
             return new JsonResult(batches);
         }
 
+        
     }
 }

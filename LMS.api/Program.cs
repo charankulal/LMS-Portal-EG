@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DevConnection"));
+    options.UseNpgsql("Server=localhost;Database=lmsdb;Username=postgres;Password=admin;");
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
 });

@@ -10,12 +10,6 @@ namespace LMS.api.Models
 
         public int SprintId { get; set; }
 
-        [ForeignKey("SprintId")]
-        public virtual Sprints? Sprints { get; set; }
-
-        
-        
-
         public string Title { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
